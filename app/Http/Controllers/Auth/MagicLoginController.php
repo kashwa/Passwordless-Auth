@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Auth\MagicAuthentication;
 
 class MagicLoginController extends Controller
 {
@@ -17,9 +18,11 @@ class MagicLoginController extends Controller
         return view('auth.magic.login'); 
     }
 
-    public function sendToken(Request $request)
+    public function sendToken(Request $request, MagicAuthentication $auth)
     {
         $this->validateLogin($request);
+    
+        $auth->requestLink();
     }
 
     public function validateLogin(Request $request)
