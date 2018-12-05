@@ -2,11 +2,14 @@
 
 namespace App\Auth;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class MagicAuthentication
 {
   protected $request;
+
+  protected $identifier = 'email';
 
   public function __construct(Request $request)
   {
@@ -15,6 +18,13 @@ class MagicAuthentication
   
   public function requestLink()
   {
-    dd($this->request);
+    $user = $this->getUserByIdentifier($this->request->get($this->identifier));
+
+    
+  }
+
+  protected function getUserByIdentifier($value)
+  {
+    return User::where($this->identifier, $value)->firstOrFail();
   }
 }
