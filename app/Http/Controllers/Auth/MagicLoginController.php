@@ -14,6 +14,18 @@ class MagicLoginController extends Controller
      */
     public function show()
     {
-       return view('auth.magic.login'); 
+        return view('auth.magic.login'); 
+    }
+
+    public function sendToken(Request $request)
+    {
+        $this->validateLogin($request);
+    }
+
+    public function validateLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|max:255|exists:users,email'
+        ]);
     }
 }
