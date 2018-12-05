@@ -20,7 +20,7 @@ class MagicAuthentication
   {
     $user = $this->getUserByIdentifier($this->request->get($this->identifier));
 
-    
+    $user->storeToken();
   }
 
   protected function getUserByIdentifier($value)
