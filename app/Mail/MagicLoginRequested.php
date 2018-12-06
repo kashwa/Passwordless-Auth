@@ -21,7 +21,7 @@ class MagicLoginRequested extends Mailable
      *
      * @return void
      */
-    public function __construct(User $user, $options)
+    public function __construct(User $user, array $options)
     {
         $this->user = $user;
         $this->options = $options;
@@ -34,6 +34,13 @@ class MagicLoginRequested extends Mailable
      */
     public function build()
     {
-        return $this->subject('Your Magic Login Link.')->view('email.auth.magic.link');
+        return $this->subject('Your Magic Login Link.')->view('email.auth.magic.link')->with([
+            'link' => $this->buildLink(),
+        ]);
+    }
+
+    public function buildLink()
+    {
+        return url('/login/magic/' . $this->user->token->token . '?' . http_build_query($this->options));
     }
 }
