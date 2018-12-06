@@ -1,1 +1,1 @@
-Your Magic Login Link is: 
+Your Magic Login Link is: <a href="{{ $link }}"> {{ $link }} </a>
