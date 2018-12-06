@@ -29,4 +29,17 @@ trait MagicallyAuthenticatable
   {
     return $this->hasOne(UserLoginToken::class);
   }
+
+  /**
+   * Recieve array of options
+   * send the magic link to email afterwards.
+   *
+   * @param array $options
+   * @return void
+   */
+  public function sendMagicLink(array $options)
+  {
+    
+  }
+
 }
