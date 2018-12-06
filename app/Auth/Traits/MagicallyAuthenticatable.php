@@ -2,7 +2,9 @@
 
 namespace App\Auth\Traits;
 
+use Mail;
 use App\UserLoginToken;
+use App\Mail\MagicLoginRequested;
 
 
 trait MagicallyAuthenticatable
@@ -39,7 +41,7 @@ trait MagicallyAuthenticatable
    */
   public function sendMagicLink(array $options)
   {
-    
+    Mail::to($this)->send(new MagicLoginRequested($this, $options));
   }
 
 }

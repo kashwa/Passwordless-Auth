@@ -9,6 +9,9 @@ use App\Auth\MagicAuthentication;
 
 class MagicLoginController extends Controller
 {
+
+    protected $redirectedOnRequested = '/login/magic';
+
     /**
      * return the view for Passwordless Auth.
      *
@@ -24,6 +27,8 @@ class MagicLoginController extends Controller
         $this->validateLogin($request);
     
         $auth->requestLink();
+
+        return redirect()->to($this->redirectedOnRequested)->with('success', 'we\'ve sent you a magic link.');
     }
 
     public function validateLogin(Request $request)
